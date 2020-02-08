@@ -5,8 +5,11 @@
  */
 package Controladores;
 
+import Modelos.Conexion;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +19,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -31,21 +36,31 @@ public class AutorController implements Initializable {
     @FXML
     private TextField txtApeAut;
     @FXML
-    private TextField txtPaisAut;
-    @FXML
     private Button btnEditarAut;
     @FXML
     private Button btnEliminarAut;
     @FXML
     private Button btnGuardarAut;
+    @FXML
+    private ComboBox<String> cmbPaisAut;
+    @FXML
+    private TableView tblAutor;
 
     /**
      * Initializes the controller class.
      */
+    PreparedStatement preparedStatement;
+    Connection connection;
+    
+    public AutorController(){
+        
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
+    
          public void closeWindows(){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Principal.fxml"));

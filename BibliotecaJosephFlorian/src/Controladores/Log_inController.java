@@ -23,7 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import Util.ConnectionUtil;
+import Modelos.Conexion;
 import animatefx.animation.*;
 import javafx.event.ActionEvent;
 /**
@@ -45,6 +45,7 @@ public class Log_inController implements Initializable {
     private Button btnSignin;
 
     /// -- 
+
     Connection con = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
@@ -52,6 +53,8 @@ public class Log_inController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+
+        
         if (con == null) {
             lblErrors.setTextFill(Color.TOMATO);
             lblErrors.setText("Server Error : Check");
@@ -62,7 +65,8 @@ public class Log_inController implements Initializable {
     }
 
     public Log_inController() {
-        con = ConnectionUtil.conDB();
+        
+        con = Conexion.conDB();
     }
 
     //we gonna use string to check for status
@@ -75,7 +79,36 @@ public class Log_inController implements Initializable {
             status = "Error";
         } else {
             //query
-            String sql = "SELECT * FROM administradores Where adm_usuario = ? and adm_password = ?";
+            String sql =  "SELECT * FROM LECTOR Where NOMUSULEC = ? and PASLEC = ?";    
+            try {
+                preparedStatement = con.prepareStatement(sql);  
+                preparedStatement.setString(1, email);
+                preparedStatement.setString(2, password);
+                resultSet = preparedStatement.executeQuery();
+                if (!resultSet.next()) {
+                    setLblError(Color.TOMATO, "Enter Correct Email/Password");
+                    status = "Error";
+                } else {
+                    setLblError(Color.GREEN, "Login Successful..Redirecting..");
+                }
+            } catch (SQLException ex) {
+                System.err.println(ex.getMessage());
+                status = "Exception";
+            }
+        }
+        
+        return status;
+    }
+    private String logInAdm() {
+        String status = "Success";
+        String email = txtUsername.getText();
+        String password = txtPassword.getText();
+        if(email.isEmpty() || password.isEmpty()) {
+            setLblError(Color.TOMATO, "Empty credentials");
+            status = "Error";
+        } else {
+            //query
+            String sql = "SELECT * FROM ADMINISTRADOR Where NOMUSUADM = ? and CONADM = ?";
             try {
                 preparedStatement = con.prepareStatement(sql);
                 preparedStatement.setString(1, email);
@@ -106,7 +139,7 @@ public class Log_inController implements Initializable {
     private void handeButtonAction(MouseEvent event) {
                 if (event.getSource() == btnSignin) {
             //login here
-            if (logIn().equals("Success")) {
+            if (logInAdm().equals("Success")) {
                 
                 try {
                     //add you loading or delays - ;-)
@@ -123,6 +156,22 @@ public class Log_inController implements Initializable {
                     System.err.println(ex.getMessage());
                 }
 
+            }
+            if(logIn().equals("Success")){
+                  try {
+                    //add you loading or delays - ;-)
+                    Node node = (Node) event.getSource();
+                    Stage stage = (Stage) node.getScene().getWindow();
+                    //stage.setMaximized(true);
+                    stage.close();
+                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Vistas/Prestamo.fxml")));
+                    stage.setScene(scene);
+                    new animatefx.animation.ZoomIn(node).play();
+                    stage.show();
+
+                } catch (IOException ex) {
+                    System.err.println(ex.getMessage());
+                }
             }
         }
     }

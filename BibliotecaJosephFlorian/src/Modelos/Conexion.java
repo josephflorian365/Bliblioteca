@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Util;
+package Modelos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,17 +12,18 @@ import java.sql.DriverManager;
  *
  * @author oXCToo
  */
-public class ConnectionUtil {
+public class Conexion {
     Connection conn = null;
     public static Connection conDB()
     {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/bibliotecaja", "root", "");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/bd_bib", "root", "");
             return con;
         } catch (Exception ex) {
            return null;
         }
     }
+    
     //make sure you add the lib
 }

@@ -8,15 +8,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="532.0" prefWidth="1366.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Controladores.DevolucionesController">
+<AnchorPane id="AnchorPane" prefHeight="532.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.DevolucionesController">
    <children>
       <AnchorPane layoutY="93.0" prefHeight="439.0" prefWidth="659.0">
          <children>
             <TableView prefHeight="439.0" prefWidth="659.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn prefWidth="75.0" text="ID" />
+                <TableColumn prefWidth="137.00003051757812" text="FECHA DE SALIDAD" />
+                  <TableColumn prefWidth="129.99996948242188" text="FECHA DE ENTREGA" />
+                  <TableColumn prefWidth="71.0" text="CANTIDAD" />
+                  <TableColumn prefWidth="148.0" text="TITULO" />
+                  <TableColumn prefWidth="96.0" text="N° de Préstamo" />
               </columns>
             </TableView>
          </children>
@@ -50,8 +53,9 @@
          <children>
             <TableView prefHeight="439.0" prefWidth="422.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn prefWidth="83.0" text="ID" />
+                <TableColumn prefWidth="174.0" text="FECHA DE PRESTAMO" />
+                  <TableColumn prefWidth="164.0" text="FECHA DE DEVOLUCIÓN" />
               </columns>
             </TableView>
          </children>
