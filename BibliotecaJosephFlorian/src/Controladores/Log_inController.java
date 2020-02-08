@@ -25,7 +25,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import Modelos.Conexion;
 import animatefx.animation.*;
+import java.io.File;
 import javafx.event.ActionEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 /**
  *
  * @author oXCToo
@@ -49,6 +52,7 @@ public class Log_inController implements Initializable {
     Connection con = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

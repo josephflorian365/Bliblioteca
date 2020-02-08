@@ -1,79 +1,175 @@
-.button
+.buttonguardar
 {
--fx-background-color : #FFF;
--fx-border-color: #355ECE;
+-fx-background-color : #FFDA29;
+-fx-border-color: #FFF;
 -fx-text-fill:  #0C3988;
 }
-.button:hover
+.buttonguardar:hover
 {
--fx-background-color : #355ECE ;
+-fx-background-color : #FFDA29 ;
 -fx-text-fill:  #FFF;
 }
-.button:pressed
+.buttonguardar:pressed
 {
--fx-background-color : #0C39FF ;
+-fx-background-color : #DD5044 ;
 -fx-text-fill: #FFF;
 }
-.button2
+.buttoneliminar
 {
--fx-background-color :  #F77620;
+-fx-background-color :  #DD5044;
 -fx-border-color: #FFF;
--fx-text-fill:  #FFF;
+-fx-text-fill:  #0C3988;
 }
-.button2:hover
+.buttoneliminar:hover
 {
--fx-background-color : #0C3988 ;
+-fx-background-color : #DD5044 ;
 -fx-text-fill:   #FFF;
 }
-.button2:pressed
+.buttoneliminar:pressed
 {
 -fx-background-color : #0C3400 ;
 -fx-text-fill: #FFF;
 }
-.button3
+.buttoneditar
 {
--fx-background-color :  #F77620;
+-fx-background-color :  #69D5A3;
 -fx-border-color: #FFF;
--fx-text-fill:  #FFF;
+-fx-text-fill:  #0C3988;
 }
-.button3:hover
+.buttoneditar:hover
 {
--fx-background-color : #0C3988 ;
+-fx-background-color : #69D5A3 ;
 -fx-text-fill:   #FFF;
 }
-.button3:pressed
+.buttoneditar:pressed
 {
 -fx-background-color : #0C3400 ;
 -fx-text-fill: #FFF;
 }
-.button4
+.buttonactualizar
 {
 -fx-background-color :  #F77620;
 -fx-border-color: #FFF;
--fx-text-fill:  #FFF;
+-fx-text-fill:  #0C3988;
 }
-.button4:hover
+.buttonactualizar:hover
 {
--fx-background-color : #0C3988 ;
+-fx-background-color : #F77620 ;
 -fx-text-fill:   #FFF;
 }
-.button4:pressed
+.buttonactualizar:pressed
 {
 -fx-background-color : #0C3400 ;
 -fx-text-fill: #FFF;
 }
-.button5
+.buttonrefrescar
 {
--fx-background-color :  #F77620;
+-fx-background-color :  #65C7DF;
 -fx-border-color: #FFF;
--fx-text-fill:  #FFF;
+-fx-text-fill:  #0C3988;
 }
-.button5:hover
+.buttonrefrescar:hover
 {
--fx-background-color : #0C3988 ;
+-fx-background-color : #65C7DF ;
 -fx-text-fill:   #FFF;
 }
-.button5:pressed
+.buttonrefrescar:pressed
+{
+-fx-background-color : #0C3400 ;
+-fx-text-fill: #FFF;
+}
+.buttonusuarios
+{
+-fx-background-color :  #65C7DF;
+-fx-border-color: #FFF;
+-fx-text-fill:  #0C3988;
+}
+.buttonusuarios:hover
+{
+-fx-background-color : #65C7DF ;
+-fx-text-fill:   #FFF;
+}
+.buttonusuarios:pressed
+{
+-fx-background-color : #0C3400 ;
+-fx-text-fill: #FFF;
+}
+.buttonlibros
+{
+-fx-background-color :  #65C7DF;
+-fx-border-color: #FFF;
+-fx-text-fill:  #0C3988;
+}
+.buttonlibros:hover
+{
+-fx-background-color : #65C7DF ;
+-fx-text-fill:   #FFF;
+}
+.buttonlibros:pressed
+{
+-fx-background-color : #0C3400 ;
+-fx-text-fill: #FFF;
+}
+.buttonautores
+{
+-fx-background-color :  #65C7DF;
+-fx-border-color: #FFF;
+-fx-text-fill:  #0C3988;
+}
+.buttonautores:hover
+{
+-fx-background-color : #65C7DF ;
+-fx-text-fill:   #FFF;
+}
+.buttonautores:pressed
+{
+-fx-background-color : #0C3400 ;
+-fx-text-fill: #FFF;
+}
+.buttoneditorial
+{
+-fx-background-color :  #65C7DF;
+-fx-border-color: #FFF;
+-fx-text-fill:  #0C3988;
+}
+.buttoneditorial:hover
+{
+-fx-background-color : #65C7DF ;
+-fx-text-fill:   #FFF;
+}
+.buttoneditorial:pressed
+{
+-fx-background-color : #0C3400 ;
+-fx-text-fill: #FFF;
+}
+.buttondevolucion
+{
+-fx-background-color :  #65C7DF;
+-fx-border-color: #FFF;
+-fx-text-fill:  #0C3988;
+}
+.buttondevolucion:hover
+{
+-fx-background-color : #65C7DF ;
+-fx-text-fill:   #FFF;
+}
+.buttondevolucion:pressed
+{
+-fx-background-color : #0C3400 ;
+-fx-text-fill: #FFF;
+}
+.buttonprestamo
+{
+-fx-background-color :  #65C7DF;
+-fx-border-color: #FFF;
+-fx-text-fill:  #0C3988;
+}
+.buttonprestamo:hover
+{
+-fx-background-color : #65C7DF ;
+-fx-text-fill:   #FFF;
+}
+.buttonprestamo:pressed
 {
 -fx-background-color : #0C3400 ;
 -fx-text-fill: #FFF;
