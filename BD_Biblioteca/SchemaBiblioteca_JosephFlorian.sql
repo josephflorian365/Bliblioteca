@@ -1,0 +1,92 @@
+CREATE DATABASE BD_BIB;
+
+USE BD_BIB;
+
+-- tables
+-- Table: AUTOR
+CREATE TABLE AUTOR (
+    IDAUT int NOT NULL AUTO_INCREMENT COMMENT 'Contiene el identificador de cada autor',
+    NOMAUT varchar(200) NULL COMMENT 'Contiene el nombre de cada autor',
+    APEAUT varchar(200) NULL COMMENT 'Contiene el apellido de cada autor',
+    PAISAUT varchar(100) NOT NULL COMMENT 'Contiene el país de cada autor',
+    CONSTRAINT AUTOR_pk PRIMARY KEY (IDAUT)
+) COMMENT 'Contiene los datos del autor';
+
+-- Table: DETALLE_PRESTAMO
+CREATE TABLE DETALLEPRESTAMO (
+    IDDET int NOT NULL AUTO_INCREMENT COMMENT 'Contiene el identificador de cada detalle del préstamos',
+    FECSALDET varchar(50) NULL COMMENT 'Contiene la fecha de salida del libro',
+    FECENTDET varchar(50) NULL COMMENT 'Contiene la fecha en que se entrega el libro',
+    CANDET int NOT NULL COMMENT 'Contiene la cantidad de libros por prestamo',
+    IDPRE int NOT NULL COMMENT 'Contiene el identificador de cada préstamo',
+    IDLIB int NOT NULL COMMENT 'Contiene el identificador del libro',
+    CONSTRAINT DETALLEPRESTAMO_pk PRIMARY KEY (IDDET)
+) COMMENT 'Contiene las dependencias totales';
+
+-- Table: EDITORIAL
+CREATE TABLE EDITORIAL (
+    IDEDI int NOT NULL AUTO_INCREMENT COMMENT 'Contiene el identificador de cada editorial',
+    NOMEDI varchar(200) NULL COMMENT 'Contiene el nombre de cada editorial',
+    CONSTRAINT EDITORIAL_pk PRIMARY KEY (IDEDI)
+) COMMENT 'Contiene datos de la editorial';
+
+-- Table: LECTOR
+CREATE TABLE LECTOR (
+    IDLEC int NOT NULL AUTO_INCREMENT COMMENT 'Contiene el identificador de cada usuario',
+    NOMLEC varchar(100) NULL COMMENT 'Contiene el nombre de cada lector',
+    APELEC varchar(200) NULL COMMENT 'Contiene el apellido de cada lector',
+    TELLEC varchar(200) NULL COMMENT 'Contiene el teléfono de cada lector',
+    NOMUSULEC varchar(200) NULL COMMENT 'Contiene el nombre con el cual accederá al sistema',
+    PASLEC varchar(20) NULL COMMENT 'Contiene la contraseña con el cual accederá al sistema',
+    CONSTRAINT LECTOR_pk PRIMARY KEY (IDLEC)
+) COMMENT 'Contiene los datos del lector';
+
+-- Table: LIBRO
+CREATE TABLE LIBRO (
+    IDLIB int NOT NULL AUTO_INCREMENT COMMENT 'Contiene el identificador del libro',
+    TITLIB varchar(200) NULL COMMENT 'Contiene el titulo del libro',
+    IDEDI int NOT NULL COMMENT 'Contiene el  identificador de cada editorial',
+    IDAUT int NOT NULL COMMENT 'Contiene el identificador del autor',
+    CONSTRAINT LIBRO_pk PRIMARY KEY (IDLIB)
+) COMMENT 'Contiene las propiedades del libro';
+
+-- Table: PRESTAMO
+CREATE TABLE PRESTAMO (
+    IDPRE int NOT NULL AUTO_INCREMENT COMMENT 'Contiene el identificador de cada préstamo',
+    FECHPRE date NOT NULL COMMENT 'Contiene la fecha actual del prestamo',
+    IDLEC int NOT NULL COMMENT 'Identificador del lector',
+    CONSTRAINT PRESTAMO_pk PRIMARY KEY (IDPRE)
+) COMMENT 'Contiene el stock con la salida y entrega de cada libro';
+
+-- Table: PERFIL
+CREATE TABLE ADMINISTRADOR(
+	IDADM int NOT NULL AUTO_INCREMENT COMMENT 'Contiene el identificador de cada administrador',
+	NOMADM varchar(50) NOT NULL COMMENT 'Contiene los nombres del administrador',
+    APEADM varchar(50) NOT NULL COMMENT 'Contiene los apellidos del administrador',
+    NOMUSUADM varchar(100) NOT NULL COMMENT 'Contiene los nombre de usuario de cada administrador',
+    CONADM varchar(100) NOT NULL COMMENT 'Contiene las contraseñas de cada administrador',
+	CONSTRAINT ADMINISTRADOR PRIMARY KEY (IDADM)
+)COMMENT 'Contiene el perfil al que pertene ya sea usuario o administrador';
+
+
+ALTER TABLE DETALLEPRESTAMO ADD CONSTRAINT DETALLEPRESTAMO_PRESTAMO FOREIGN KEY DETALLEPRESRAMO_PRESTAMO (IDPRE)
+    REFERENCES PRESTAMO (IDPRE);
+
+-- Reference: LIBRO_AUTOR (table: LIBRO)
+ALTER TABLE LIBRO ADD CONSTRAINT LIBRO_AUTOR FOREIGN KEY LIBRO_AUTOR (IDAUT)
+    REFERENCES AUTOR (IDAUT);
+
+-- Reference: LIBRO_EDITORIAL (table: LIBRO)
+ALTER TABLE LIBRO ADD CONSTRAINT LIBRO_EDITORIAL FOREIGN KEY LIBRO_EDITORIAL (IDEDI)
+    REFERENCES EDITORIAL (IDEDI);
+
+-- Reference: PRESTAMO_LECTOR (table: PRESTAMO)
+ALTER TABLE PRESTAMO ADD CONSTRAINT PRESTAMO_LECTOR FOREIGN KEY PRESTAMO_LECTOR (IDLEC)
+    REFERENCES LECTOR (IDLEC);
+
+ALTER TABLE DETALLEPRESTAMO ADD CONSTRAINT DETALLEPRESTAMO_LIBRO FOREIGN KEY DETALLEPRESTAMO_LIBRO (IDLIB)
+    REFERENCES LIBRO (IDLIB);
+ 
+
+-- End of file.
+
