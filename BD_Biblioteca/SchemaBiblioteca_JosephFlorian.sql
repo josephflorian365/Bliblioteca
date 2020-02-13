@@ -8,7 +8,7 @@ CREATE TABLE AUTOR (
     IDAUT int NOT NULL AUTO_INCREMENT COMMENT 'Contiene el identificador de cada autor',
     NOMAUT varchar(200) NULL COMMENT 'Contiene el nombre de cada autor',
     APEAUT varchar(200) NULL COMMENT 'Contiene el apellido de cada autor',
-    PAISAUT varchar(100) NOT NULL COMMENT 'Contiene el país de cada autor',
+    IDPAIS int NOT NULL COMMENT 'Contiene el identificador de cada pais',
     CONSTRAINT AUTOR_pk PRIMARY KEY (IDAUT)
 ) COMMENT 'Contiene los datos del autor';
 
@@ -42,11 +42,12 @@ CREATE TABLE LECTOR (
 ) COMMENT 'Contiene los datos del lector';
 
 -- Table: LIBRO
+
 CREATE TABLE LIBRO (
     IDLIB int NOT NULL AUTO_INCREMENT COMMENT 'Contiene el identificador del libro',
     TITLIB varchar(200) NULL COMMENT 'Contiene el titulo del libro',
-    IDEDI int NOT NULL COMMENT 'Contiene el  identificador de cada editorial',
-    IDAUT int NOT NULL COMMENT 'Contiene el identificador del autor',
+    IDEDI int NULL COMMENT 'Contiene el  identificador de cada editorial',
+    IDAUT int NULL COMMENT 'Contiene el identificador del autor',
     CONSTRAINT LIBRO_pk PRIMARY KEY (IDLIB)
 ) COMMENT 'Contiene las propiedades del libro';
 
@@ -65,8 +66,14 @@ CREATE TABLE ADMINISTRADOR(
     APEADM varchar(50) NOT NULL COMMENT 'Contiene los apellidos del administrador',
     NOMUSUADM varchar(100) NOT NULL COMMENT 'Contiene los nombre de usuario de cada administrador',
     CONADM varchar(100) NOT NULL COMMENT 'Contiene las contraseñas de cada administrador',
-	CONSTRAINT ADMINISTRADOR PRIMARY KEY (IDADM)
+	CONSTRAINT ADMINISTRADOR_pk PRIMARY KEY (IDADM)
 )COMMENT 'Contiene el perfil al que pertene ya sea usuario o administrador';
+
+CREATE TABLE PAIS(
+	IDPAIS int NOT NULL AUTO_INCREMENT COMMENT 'Contiene el identificador de cada pais',
+    NOMPAIS varchar(50) NOT NULL COMMENT 'Contiene el nombre del pais',
+    CONSTRAINT PAIS_pk PRIMARY KEY (IDPAIS)
+)COMMENT 'Tabla para agregar paises';
 
 
 ALTER TABLE DETALLEPRESTAMO ADD CONSTRAINT DETALLEPRESTAMO_PRESTAMO FOREIGN KEY DETALLEPRESRAMO_PRESTAMO (IDPRE)
@@ -87,6 +94,7 @@ ALTER TABLE PRESTAMO ADD CONSTRAINT PRESTAMO_LECTOR FOREIGN KEY PRESTAMO_LECTOR 
 ALTER TABLE DETALLEPRESTAMO ADD CONSTRAINT DETALLEPRESTAMO_LIBRO FOREIGN KEY DETALLEPRESTAMO_LIBRO (IDLIB)
     REFERENCES LIBRO (IDLIB);
  
-
+ALTER TABLE AUTOR ADD CONSTRAINT AUTOR_PAIS FOREIGN KEY AUTOR_PAIS (IDPAIS)
+	REFERENCES PAIS(IDPAIS);
 -- End of file.
-
+show create table LIBRO

@@ -1,14 +1,25 @@
 USE BD_BIB;
-INSERT INTO AUTOR (NOMAUT,APEAUT,PAISAUT)
+INSERT INTO PAIS(NOMPAIS)
+VALUES
+('España'),
+('Colombia'),
+('México'),
+('Estados Unidos'),
+('Venezuela'),
+('Italia'),
+('Francia'),
+('Portugal');
+
+INSERT INTO AUTOR (NOMAUT,APEAUT,IDPAIS)
  VALUES
-('Miguel de Cervantes','Saavedra','España'),
-('William','Faulkner','Estados Unidos'),
-('Antoine ','Saint-Exupery','Francia'),
-('Nicolas','Maquiavelo','Italia'),
-('Henry','Kissinger','Alemania'),
-('Kitty','Kelley','Gran Bretaña'),
-('Aisin','Gioro Puyi','China'),
-('Pérez','Galdós','España');
+('Miguel de Cervantes','Saavedra','1'),
+('William','Faulkner','2'),
+('Antoine ','Saint-Exupery','3'),
+('Nicolas','Maquiavelo','4'),
+('Henry','Kissinger','5'),
+('Kitty','Kelley','6'),
+('Aisin','Gioro Puyi','7'),
+('Pérez','Galdós','8');
 
 INSERT INTO EDITORIAL(NOMEDI)
 VALUES
@@ -26,8 +37,8 @@ VALUES
 
 INSERT INTO LECTOR(NOMLEC,APELEC,TELLEC,NOMUSULEC,PASLEC)
 VALUES
-('jOSEPH','Florian','945-871-254','fenix','12345'),
-('Jesus','Florian','945-871-253','fenix','365'),
+('Jean','Florian','945-871-254','Messi','4578'),
+('Yisus','Florian','945-871-253','Lector','5412'),
 ('JENNIFER','DAVIS','945-871-252','fenix','111213'),
 ('JOHNNY','LOLLOBRIGIDA','945-871-251','fenix','141516'),
 ('BETTE','NICHOLSON','945-871-250','fenix','171819');
@@ -59,3 +70,21 @@ VALUES
 ('12/1/2020    15:10','19/1/2020    17:10','1','3','3'),
 ('12/1/2020    16:10','19/1/2020    18:10','1','4','4'),
 ('12/1/2020    17:10','19/1/2020    19:10','1','5','5');
+
+/*DESHABILITAR MODO SEGURO
+ (SET SQL_SAFE_UPDATES = 0;)
+*/
+
+/*RESTRICCION CONSTRAINT DESABILITADA*/
+ALTER TABLE LIBRO DROP FOREIGN KEY LIBRO_AUTOR;
+
+
+
+
+
+
+
+
+
+
+
