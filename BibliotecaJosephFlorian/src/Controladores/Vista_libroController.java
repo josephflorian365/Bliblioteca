@@ -18,6 +18,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -28,8 +30,6 @@ import javafx.stage.Stage;
 public class Vista_libroController implements Initializable {
 
     @FXML
-    private JFXTextField txtTitulo;
-    @FXML
     private ComboBox<?> cmbAutor;
     @FXML
     private ComboBox<?> cmbEditorial;
@@ -39,6 +39,10 @@ public class Vista_libroController implements Initializable {
     private Button btnEditarLi;
     @FXML
     private Button btnEliminarLi;
+    @FXML
+    private AnchorPane btnrefrescar;
+    @FXML
+    private TextField txttitlib;
 
     /**
      * Initializes the controller class.

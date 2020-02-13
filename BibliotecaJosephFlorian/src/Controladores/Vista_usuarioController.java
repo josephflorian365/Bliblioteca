@@ -70,11 +70,8 @@ public class Vista_usuarioController implements Initializable {
     private JFXTextField txtuserUsu;
     @FXML
     private JFXTextField txtcontraUsu;
-
-    //Colecciones
-    private ObservableList<usuarios> listausuarios;
-    
-    private Conexion conexion;
+    @FXML
+    private Button btnrefrescar;
     @FXML
     private Button btnGuUsu;
     @FXML
@@ -83,9 +80,12 @@ public class Vista_usuarioController implements Initializable {
     private Button btnElUsu;
     @FXML
     private TableView<usuarios> tblUs;
-    @FXML
-    private Button btnrefrescar;
+
+    //Colecciones
+    private ObservableList<usuarios> listausuarios;
     
+    private Conexion conexion;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // TODO
@@ -115,7 +115,7 @@ public class Vista_usuarioController implements Initializable {
     public void gestionarEventos() {
         tblUs.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<usuarios>() {
-            @Override
+          @Override
             public void changed(ObservableValue<? extends usuarios> arg0,
                     usuarios valorAnterior, usuarios valorSeleccionado) {
                 if (valorSeleccionado != null) {                    
@@ -251,7 +251,7 @@ public class Vista_usuarioController implements Initializable {
         }
         //cell set value factory to tableview
         
-        clmnNombre.setCellValueFactory(new PropertyValueFactory<>("NOMUSU"));
+        
         clmnNombre.setCellValueFactory(new PropertyValueFactory<>("NOMUSU"));
         clmnApellido.setCellValueFactory(new PropertyValueFactory<>("APEUSU"));
         clmnTelefono.setCellValueFactory(new PropertyValueFactory<>("TELUSU"));
@@ -277,7 +277,7 @@ public class Vista_usuarioController implements Initializable {
         }
         //cell set value factory to tableview
         
-        clmnNombre.setCellValueFactory(new PropertyValueFactory<>("NOMUSU"));
+        
         clmnNombre.setCellValueFactory(new PropertyValueFactory<>("NOMUSU"));
         clmnApellido.setCellValueFactory(new PropertyValueFactory<>("APEUSU"));
         clmnTelefono.setCellValueFactory(new PropertyValueFactory<>("TELUSU"));

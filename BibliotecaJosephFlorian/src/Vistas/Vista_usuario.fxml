@@ -90,7 +90,7 @@
       </AnchorPane>
       <AnchorPane layoutX="513.0" layoutY="108.0" prefHeight="485.0" prefWidth="599.0" style="-fx-background-color: #9C9C9C;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="513.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="108.0">
          <children>
-            <TableView fx:id="tblUs" layoutY="-11.0" prefHeight="496.0" prefWidth="599.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-11.0">
+            <TableView fx:id="tblUs" layoutY="-11.0" prefHeight="496.0" prefWidth="599.0" styleClass="chart-plot-background" stylesheets="@../Styling/fullpackstyling.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-11.0">
               <columns>
                 <TableColumn fx:id="clmnNombre" prefWidth="112.0" text="NOMBRES" />
                 <TableColumn fx:id="clmnApellido" prefWidth="124.0" text="APELLIDOS" />
@@ -103,7 +103,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="98.0" prefWidth="1114.0" style="-fx-background-color: #429CE3;" AnchorPane.bottomAnchor="494.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-6.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label alignment="TOP_CENTER" layoutX="361.0" layoutY="14.0" prefHeight="70.0" prefWidth="268.0" text="USUARIOS">
+            <Label alignment="TOP_CENTER" layoutX="423.0" layoutY="14.0" prefHeight="70.0" prefWidth="268.0" text="USUARIOS">
                <font>
                   <Font name="Bell MT Bold" size="48.0" />
                </font>

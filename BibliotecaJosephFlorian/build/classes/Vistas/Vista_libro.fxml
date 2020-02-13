@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -13,27 +15,69 @@
    <children>
       <AnchorPane layoutX="98.0" prefHeight="150.0" prefWidth="657.0" style="-fx-background-color: #FFD767;">
          <children>
-            <JFXTextField fx:id="txtTitulo" layoutX="14.0" layoutY="50.0" prefHeight="25.0" prefWidth="307.0" promptText="Titulo del libro" />
-            <ComboBox fx:id="cmbAutor" layoutX="329.0" layoutY="50.0" prefWidth="150.0" />
-            <ComboBox fx:id="cmbEditorial" layoutX="493.0" layoutY="50.0" prefWidth="150.0" />
-            <Button fx:id="btnGuardarLi" layoutX="390.0" layoutY="111.0" mnemonicParsing="false" styleClass="button4" stylesheets="@../Styling/fullpackstyling.css" text="GUADAR" />
-            <Button fx:id="btnEditarLi" layoutX="479.0" layoutY="111.0" mnemonicParsing="false" styleClass="button4" stylesheets="@../Styling/fullpackstyling.css" text="EDITAR" />
-            <Button fx:id="btnEliminarLi" layoutX="568.0" layoutY="111.0" mnemonicParsing="false" styleClass="button4" stylesheets="@../Styling/fullpackstyling.css" text="ELIMINAR" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="98.0" layoutY="150.0" prefHeight="473.0" prefWidth="657.0" style="-fx-background-color: #566468;">
-         <children>
-            <TableView layoutY="77.0" prefHeight="394.0" prefWidth="657.0">
-              <columns>
-                <TableColumn prefWidth="52.0" text="ID" />
-                <TableColumn prefWidth="187.0" text="TITULO" />
-                  <TableColumn prefWidth="226.0" text="AUTOR" />
-                  <TableColumn prefWidth="191.0" text="EDITORIAL" />
-              </columns>
-            </TableView>
-            <Label alignment="TOP_CENTER" layoutX="197.0" layoutY="14.0" prefHeight="36.0" prefWidth="268.0" text="Vista Previa" textFill="#f8f8f8">
+            <ImageView fitHeight="443.0" fitWidth="657.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes/2.jpg" />
+               </image>
+            </ImageView>
+            <ComboBox fx:id="cmbAutor" layoutX="390.0" layoutY="151.0" prefHeight="25.0" prefWidth="181.0" />
+            <ComboBox fx:id="cmbEditorial" layoutX="390.0" layoutY="218.0" prefHeight="25.0" prefWidth="181.0" />
+            <Button fx:id="btnGuardarLi" layoutX="54.0" layoutY="86.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" styleClass="buttonguardar" stylesheets="@../Styling/fullpackstyling.css" text="GUADAR" />
+            <Button fx:id="btnEditarLi" layoutX="54.0" layoutY="138.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" styleClass="buttoneditar" stylesheets="@../Styling/fullpackstyling.css" text="EDITAR" />
+            <Button fx:id="btnEliminarLi" layoutX="54.0" layoutY="193.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" styleClass="buttoneliminar" stylesheets="@../Styling/fullpackstyling.css" text="ELIMINAR" />
+            <ImageView fitHeight="25.0" fitWidth="26.0" layoutX="14.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes/icons8_save_64px.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="26.0" layoutX="14.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes/icons8_edit_30px.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="26.0" layoutX="15.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes/icons8_delete_26px_3.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="50.0" layoutY="241.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" styleClass="buttonactualizar" stylesheets="@../Styling/fullpackstyling.css" text="ACTUALIZAR" />
+            <ImageView fitHeight="25.0" fitWidth="26.0" layoutX="14.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes/icons8_synchronize_64px.png" />
+               </image>
+            </ImageView>
+            <AnchorPane fx:id="btnrefrescar" layoutY="279.0" prefHeight="341.0" prefWidth="657.0" style="-fx-background-color: #566468;">
+               <children>
+                  <TableView layoutY="77.0" prefHeight="267.0" prefWidth="657.0">
+                    <columns>
+                      <TableColumn prefWidth="52.0" text="ID" />
+                      <TableColumn prefWidth="187.0" text="TITULO" />
+                        <TableColumn prefWidth="226.0" text="AUTOR" />
+                        <TableColumn prefWidth="191.0" text="EDITORIAL" />
+                    </columns>
+                  </TableView>
+                  <Label alignment="TOP_CENTER" layoutX="195.0" layoutY="18.0" prefHeight="36.0" prefWidth="268.0" text="Vista Previa" textFill="#f8f8f8">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="14.0" layoutY="32.0" mnemonicParsing="false" styleClass="buttonrefrescar" stylesheets="@../Styling/fullpackstyling.css" text="REFRESH" />
+                  <ImageView fitHeight="25.0" fitWidth="26.0" layoutX="90.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/icons8_replay_48px.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="61.0" fitWidth="64.0" layoutX="518.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/kisspng-vector-graphics-book-computer-icons-encapsulated-p-5bf9f29b799da7.3176548015431072274982.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <TextField fx:id="txttitlib" layoutX="390.0" layoutY="86.0" prefHeight="25.0" prefWidth="181.0" promptText="Titulo del Libro" />
+            <Label layoutX="200.0" layoutY="14.0" text="REGISTRAR" textFill="WHITE">
                <font>
-                  <Font size="36.0" />
+                  <Font name="System Bold" size="48.0" />
                </font>
             </Label>
          </children>
