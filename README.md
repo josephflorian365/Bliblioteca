@@ -8,3 +8,5 @@
 ![4cb7d729-26bc-49aa-a06f-84dc2a329e1f](https://user-images.githubusercontent.com/53907643/74476813-27438580-4e78-11ea-8505-735a90f5fb3c.jpg)
 # Diseño Libro
 ![a80d963e-5aea-4fc2-9fde-979b5dbf45c8](https://user-images.githubusercontent.com/53907643/74093935-001b3b80-4aa7-11ea-8a30-f6d07652986b.jpg)
+# Diseño Autor
+![52e8d717-ee1f-4368-b5f9-8b0055c6b37e](https://user-images.githubusercontent.com/53907643/74477017-7d182d80-4e78-11ea-842f-c664b6472613.jpg)
