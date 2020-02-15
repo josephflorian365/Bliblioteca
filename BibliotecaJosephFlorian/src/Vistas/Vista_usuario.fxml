@@ -20,7 +20,7 @@
                   <Image url="@../imagenes/nin-o-leyendo-pixabay.jpeg" />
                </image>
             </ImageView>
-            <TextField fx:id="txtCodigo" disable="true" layoutX="47.0" layoutY="22.0" prefHeight="25.0" prefWidth="89.0" />
+            <TextField fx:id="txtCodigo" disable="true" layoutX="47.0" layoutY="22.0" prefHeight="25.0" prefWidth="89.0" promptText="ID" />
             <JFXTextField fx:id="txtNombresUsu" layoutX="47.0" layoutY="85.0" prefHeight="25.0" prefWidth="354.0" promptText="Nombres" />
             <JFXTextField fx:id="txtApeUsu" layoutX="47.0" layoutY="148.0" prefHeight="25.0" prefWidth="354.0" promptText="Apellidos" />
             <JFXTextField fx:id="txtTelUsu" layoutX="47.0" layoutY="213.0" prefHeight="25.0" prefWidth="354.0" promptText="Teléfono" />

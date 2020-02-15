@@ -6,9 +6,12 @@
 package Modelos;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -47,6 +50,44 @@ public class Editorial {
 
     public StringProperty NOMEDIProperty() {
         return NOMEDI;
+    }
+    
+    public int guardarRegistro(Connection connection){
+        try{
+            //Enviar inyeccion SQL
+            PreparedStatement instruccion =
+                    connection.prepareStatement("INSERT INTO EDITORIAL (NOMEDI) VALUES (?)");
+            instruccion.setString(1, NOMEDI.get());
+            return instruccion.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    
+    public int actualizarRegistro (Connection connection){
+        try{
+            PreparedStatement instruccion =
+                    connection.prepareStatement("UPDATE EDITORIAL SET NOMEDI = ? WHERE IDEDI = ?");
+            instruccion.setString(1,NOMEDI.get());
+            instruccion.setInt(2, IDEDI.get());
+            return instruccion.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    
+    public int eliminarRegistro(Connection connection){
+        try{
+            PreparedStatement instruccion = 
+                    connection.prepareStatement("DELETE FROM EDITORIAL WHERE IDEDI = ?");
+            instruccion.setInt(1, IDEDI.get());
+            return instruccion.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     public static void llenarInformacionEditorial(Connection connection, ObservableList<Editorial> lista) {

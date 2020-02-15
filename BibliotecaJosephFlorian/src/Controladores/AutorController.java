@@ -224,12 +224,8 @@ public class AutorController implements Initializable {
             conexion.conDB();
             listaPais = FXCollections.observableArrayList();
             listautor = FXCollections.observableArrayList();
-            
-            Pais.llenarInformacion(conexion.conDB(), listaPais);
-            Autor.llenarInformacionAutor(conexion.conDB(), listautor);
-            
-            tblAutor.setItems(listautor);
-            cmbPaisAut.setItems(listaPais);
+
+
             //Execute query
             ResultSet rs = conexion.conDB().createStatement().executeQuery("SELECT A.IDAUT, "
                                                     + "A.NOMAUT, "
@@ -252,6 +248,9 @@ public class AutorController implements Initializable {
         clmnnomaut.setCellValueFactory(new PropertyValueFactory<Autor, String>("NOMAUT"));
         clmnapeaut.setCellValueFactory(new PropertyValueFactory<Autor, String>("APEAUT"));
         clmnpaisaut.setCellValueFactory(new PropertyValueFactory<Autor, Pais>("pais"));
-        gestionarEventos();
+        
+        tblAutor.setItems(null);
+        tblAutor.setItems(listautor);
+        
     }
 }
