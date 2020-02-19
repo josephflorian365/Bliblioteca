@@ -236,12 +236,12 @@ public class Vista_usuarioController implements Initializable {
     }
     
     @FXML
-    private void llenardata(ActionEvent event) {
+    private void orderby(ActionEvent event) {
         try {
             conexion.conDB();
             listausuarios = FXCollections.observableArrayList();
             //Execute query
-            ResultSet rs = conexion.conDB().createStatement().executeQuery("SELECT * FROM LECTOR");
+            ResultSet rs = conexion.conDB().createStatement().executeQuery("SELECT * FROM LECTOR  ORDER BY NOMLEC");
             while (rs.next()) {
                 //get
                 listausuarios.add(new usuarios(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));

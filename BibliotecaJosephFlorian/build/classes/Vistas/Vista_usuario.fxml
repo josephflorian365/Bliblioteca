@@ -30,7 +30,7 @@
             <Button fx:id="btnGuUsu" layoutX="47.0" layoutY="404.0" mnemonicParsing="false" onAction="#guardarRegistro" styleClass="buttonguardar" stylesheets="@../Styling/fullpackstyling.css" text="GUARDAR" />
             <Button fx:id="btnActUsu" disable="true" layoutX="164.0" layoutY="404.0" mnemonicParsing="false" onAction="#actualizarRegistro" styleClass="buttonactualizar" stylesheets="@../Styling/fullpackstyling.css" text="ACTUALIZAR" />
             <Button fx:id="btnElUsu" disable="true" layoutX="287.0" layoutY="404.0" mnemonicParsing="false" onAction="#eliminarRegistro" styleClass="buttoneliminar" stylesheets="@../Styling/fullpackstyling.css" text="ELIMINAR" />
-            <Button fx:id="btnrefrescar" layoutX="398.0" layoutY="21.0" mnemonicParsing="false" onAction="#llenardata" styleClass="buttonrefrescar" stylesheets="@../Styling/fullpackstyling.css" text="REFRESH" />
+            <Button fx:id="btnrefrescar" layoutX="398.0" layoutY="21.0" mnemonicParsing="false" onAction="#orderby" styleClass="buttonrefrescar" stylesheets="@../Styling/fullpackstyling.css" text="REFRESH" />
             <ImageView fitHeight="27.0" fitWidth="29.0" layoutX="14.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../imagenes/icons8_customer_32px.png" />

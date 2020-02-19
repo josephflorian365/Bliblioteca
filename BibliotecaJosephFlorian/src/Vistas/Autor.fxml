@@ -26,7 +26,7 @@
             <Button fx:id="btnEliminarAut" layoutX="295.0" layoutY="402.0" mnemonicParsing="false" onAction="#eliminarRegistro" prefHeight="25.0" prefWidth="122.0" styleClass="buttoneliminar" stylesheets="@../Styling/fullpackstyling.css" text="ELIMINAR" />
             <ComboBox fx:id="cmbPaisAut" layoutX="16.0" layoutY="400.0" prefHeight="25.0" prefWidth="226.0" promptText="País" styleClass="buttonrefrescar" stylesheets="@../Styling/fullpackstyling.css" />
             <Button fx:id="btnactualizaraut" disable="true" layoutX="295.0" layoutY="208.0" mnemonicParsing="false" onAction="#actualizarRegistro" prefHeight="25.0" prefWidth="122.0" styleClass="buttonactualizar" stylesheets="@../Styling/fullpackstyling.css" text="ACTUALIZAR" />
-            <Button fx:id="btnrefrescar" layoutX="295.0" layoutY="14.0" mnemonicParsing="false" onAction="#refrescarData" prefHeight="27.0" prefWidth="122.0" styleClass="buttonrefrescar" stylesheets="@../Styling/fullpackstyling.css" text="REFRESH" />
+            <Button fx:id="btnrefrescar" layoutX="295.0" layoutY="14.0" mnemonicParsing="false" onAction="#orderBy" prefHeight="27.0" prefWidth="122.0" styleClass="buttonrefrescar" stylesheets="@../Styling/fullpackstyling.css" text="REFRESH" />
             <TextField fx:id="txtcodigo" disable="true" layoutX="61.0" layoutY="52.0" prefHeight="25.0" prefWidth="55.0" promptText="ID" />
             <JFXTextField fx:id="txtNomAut" layoutX="16.0" layoutY="209.0" prefHeight="25.0" prefWidth="226.0" promptText="Nombres" />
             <JFXTextField fx:id="txtApeAut" layoutX="16.0" layoutY="310.0" prefHeight="25.0" prefWidth="226.0" promptText="Apellidos" />

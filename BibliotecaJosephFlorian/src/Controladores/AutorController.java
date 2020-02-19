@@ -218,7 +218,6 @@ public class AutorController implements Initializable {
         }
     }
     
-    @FXML
     public void refrescarData(){
         try{
             conexion.conDB();
@@ -235,6 +234,43 @@ public class AutorController implements Initializable {
                                                     + "FROM AUTOR A "
                                                     + "INNER JOIN PAIS P "
                                                     + "ON (A.IDPAIS = P.IDPAIS) ");
+            while (rs.next()){
+                //get
+                listautor.add(new Autor(rs.getInt("IDAUT"), rs.getString("NOMAUT"), rs.getString("APEAUT"),
+                new Pais(rs.getInt("IDPAIS"), rs.getString("NOMPAIS"))));
+            }
+        } catch (SQLException ex) {
+            System.out.println("ERROR: "+ ex);
+        }
+        //cell set value factory to tableview
+
+        clmnnomaut.setCellValueFactory(new PropertyValueFactory<Autor, String>("NOMAUT"));
+        clmnapeaut.setCellValueFactory(new PropertyValueFactory<Autor, String>("APEAUT"));
+        clmnpaisaut.setCellValueFactory(new PropertyValueFactory<Autor, Pais>("pais"));
+        
+        tblAutor.setItems(null);
+        tblAutor.setItems(listautor);
+        
+    }
+    
+    @FXML
+    public void orderBy(){
+        try{
+            conexion.conDB();
+            listaPais = FXCollections.observableArrayList();
+            listautor = FXCollections.observableArrayList();
+
+
+            //Execute query
+            ResultSet rs = conexion.conDB().createStatement().executeQuery("SELECT A.IDAUT, "
+                                                    + "A.NOMAUT, "
+                                                    + "A.APEAUT, "
+                                                    + "A.IDPAIS, "
+                                                    + "P.NOMPAIS "
+                                                    + "FROM AUTOR A "
+                                                    + "INNER JOIN PAIS P "
+                                                    + "ON (A.IDPAIS = P.IDPAIS)"
+                                                    + " ORDER BY A.NOMAUT ");
             while (rs.next()){
                 //get
                 listautor.add(new Autor(rs.getInt("IDAUT"), rs.getString("NOMAUT"), rs.getString("APEAUT"),

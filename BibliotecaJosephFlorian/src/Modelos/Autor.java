@@ -151,4 +151,8 @@ public class Autor {
              e.printStackTrace();
          }
      }
+     @Override
+     public String toString(){
+         return NOMAUT.get() + " " + APEAUT.get() ;
+     }
 }

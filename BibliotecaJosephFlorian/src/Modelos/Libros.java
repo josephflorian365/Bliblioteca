@@ -119,7 +119,14 @@ public class Libros {
             try{
                 Statement instruccion = connection.createStatement();
                 ResultSet resultado = instruccion.executeQuery( 
-                        "SELECT L.TITL, E.NOMEDI, A.NOMAUT, A.APEAUT FROM LIBRO L INNER JOIN EDITORIAL E ON (L.IDEDI = E.IDEDI) INNER JOIN AUTOR A ON (L.IDAUT = A.IDAUT)"
+                        "SELECT L.IDLIB, L.TITLIB, "
+                                + "E.IDEDI, E.NOMEDI, "
+                                + "A.IDAUT, A.NOMAUT, A.APEAUT, "
+                                + "P.IDPAIS, P.NOMPAIS "
+                                + "FROM LIBRO L, EDITORIAL E, AUTOR A, PAIS P "
+                                + "WHERE L.IDEDI = E.IDEDI "
+                                + "AND L.IDAUT = A.IDAUT "
+                                + "AND A.IDPAIS = P.IDPAIS"
                 );
                 while(resultado.next()){
                     lista.add(
@@ -142,6 +149,10 @@ public class Libros {
             } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    @Override
+    public String toString(){
+        return TITLIB.get();
     }
     
 }

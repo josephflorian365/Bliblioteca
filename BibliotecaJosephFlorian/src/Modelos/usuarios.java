@@ -189,4 +189,8 @@ public class usuarios {
             e.printStackTrace();
         }
     }
+    @Override
+    public String toString(){
+        return NOMUSU.get() + " " + APEUSU.get();
+    }
 }

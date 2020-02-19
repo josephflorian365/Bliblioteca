@@ -172,7 +172,6 @@ public class EditorialController implements Initializable {
         btnactualizar.setDisable(true);
     }
     
-    @FXML
     public void refrescarData(){
         try{
             conexion.conDB();
@@ -193,6 +192,30 @@ public class EditorialController implements Initializable {
         tbledi.setItems(null);
         tbledi.setItems(listaeditorial);
     }
+    @FXML
+    public void orderBy(){
+        try{
+            conexion.conDB();
+            listaeditorial = FXCollections.observableArrayList();
+
+            //Excute Query
+            ResultSet rs = conexion.conDB().createStatement().executeQuery("SELECT * FROM EDITORIAL ORDER BY NOMEDI");
+            while(rs.next()){
+            //get
+            listaeditorial.add(new Editorial(rs.getInt(1), rs.getString(2)));
+        }
+        } catch (SQLException ex) {
+            System.out.println("ERROR: "+ex);
+        }
+        
+        clmnntituloedi.setCellValueFactory(new PropertyValueFactory<Editorial, String>("NOMEDI"));
+        
+        tbledi.setItems(null);
+        tbledi.setItems(listaeditorial);
+    }
+    
+    
+    
     public void closeWindows(){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Principal.fxml"));
