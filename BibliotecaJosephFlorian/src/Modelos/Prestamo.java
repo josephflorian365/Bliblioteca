@@ -93,6 +93,7 @@ public class Prestamo {
             instruccion.setDate(1, FECHPRE);
             instruccion.setInt(2, Usuario.getIDUSU());
             instruccion.setInt(3, libro.getIDLIB());
+            instruccion.setInt(4, IDPRE.get());
             return instruccion.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -162,5 +163,9 @@ public class Prestamo {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    @Override
+    public String toString(){
+         return FECHPRE.toString();
     }
 }

@@ -5,13 +5,18 @@
  */
 package Controladores;
 
+import Modelos.Autor;
 import Modelos.Conexion;
+import Modelos.Editorial;
 import Modelos.Libros;
+import Modelos.Pais;
 import Modelos.Prestamo;
 import Modelos.usuarios;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Observable;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -143,7 +148,7 @@ public class PrestamoController implements Initializable {
         
         if(resultado == 1){
             listaprestamo.add(f);
-            
+            refrescarData();
             //JDK8u40
             Alert mensaje = new Alert(Alert.AlertType.INFORMATION);
             mensaje.setTitle("Registro agregado");
@@ -199,6 +204,119 @@ public class PrestamoController implements Initializable {
         btnguardar.setDisable(false);
         btneliminar.setDisable(true);
         btnactualizar.setDisable(true);
+    }
+    public void refrescarData(){
+        try{
+            conexion.conDB();
+            listalibro = FXCollections.observableArrayList();
+            listaprestamo = FXCollections.observableArrayList();
+            listausuario = FXCollections.observableArrayList();
+            
+            //Execute query
+            ResultSet rs = conexion.conDB().createStatement().executeQuery("SELECT F.IDPRE, F.FECHPRE, "
+                    + "L.IDLEC, "
+                    + "L.NOMLEC, L.APELEC, "
+                    + "L.TELLEC, L.NOMUSULEC, L.PASLEC, "
+                    + "O.IDLIB,"
+                    + "O.TITLIB, "
+                    + "E.IDEDI,"
+                    + "E.NOMEDI,"
+                    + "A.IDAUT,"
+                    + "A.NOMAUT,"
+                    + "A.APEAUT,"
+                    + "P.IDPAIS,"
+                    + "P.NOMPAIS "
+                    + "FROM PRESTAMO F "
+                    + "INNER JOIN LECTOR L "
+                    + "ON (F.IDLEC = L.IDLEC) "
+                    + "INNER JOIN LIBRO O "
+                    + "ON (F.IDLIB = O.IDLIB)"
+                    + "INNER JOIN EDITORIAL E "
+                    + "ON (O.IDEDI = E.IDEDI) "
+                    + "INNER JOIN AUTOR A "
+                    + "ON (O.IDAUT = A.IDAUT) "
+                    + "INNER JOIN PAIS P "
+                    + "ON(A.IDPAIS = P.IDPAIS)");
+            
+            while(rs.next()){
+                //get
+                listaprestamo.add(new Prestamo(rs.getInt("IDPRE"), rs.getDate("FECHPRE"), 
+                        new usuarios(rs.getInt("IDLEC"), rs.getString("NOMLEC"), rs.getString("APELEC"), rs.getString("TELLEC"), rs.getString("NOMUSULEC"), rs.getString("PASLEC")),
+                        new Libros(rs.getInt("IDLIB"), rs.getString("TITLIB"), 
+                                new Editorial(rs.getInt("IDEDI"), rs.getString("NOMEDI")),
+                                new Autor(rs.getInt("IDAUT"), rs.getString("NOMAUT"), rs.getString("APEAUT"), 
+                                new Pais(rs.getInt("IDPAIS"), rs.getString("NOMPAIS"))))));
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println("ERROR: "+ ex);
+        }
+        //cell set value factory to tableview
+        
+        clmnLibro.setCellValueFactory(new PropertyValueFactory<Prestamo, Libros>("libro"));
+        clmnfecha.setCellValueFactory(new PropertyValueFactory<Prestamo, Date>("FECHPRE"));
+        clmnlectorlibro.setCellValueFactory(new PropertyValueFactory<Prestamo, usuarios>("Usuario"));
+        
+        tblprestamo.setItems(null);
+        tblprestamo.setItems(listaprestamo);
+    }
+    
+    @FXML
+    public void orderBy(){
+        try{
+            conexion.conDB();
+            listalibro = FXCollections.observableArrayList();
+            listaprestamo = FXCollections.observableArrayList();
+            listausuario = FXCollections.observableArrayList();
+            
+            //Execute query
+            ResultSet rs = conexion.conDB().createStatement().executeQuery("SELECT F.IDPRE, F.FECHPRE, "
+                    + "L.IDLEC, "
+                    + "L.NOMLEC, L.APELEC, "
+                    + "L.TELLEC, L.NOMUSULEC, L.PASLEC, "
+                    + "O.IDLIB,"
+                    + "O.TITLIB, "
+                    + "E.IDEDI,"
+                    + "E.NOMEDI,"
+                    + "A.IDAUT,"
+                    + "A.NOMAUT,"
+                    + "A.APEAUT,"
+                    + "P.IDPAIS,"
+                    + "P.NOMPAIS "
+                    + "FROM PRESTAMO F "
+                    + "INNER JOIN LECTOR L "
+                    + "ON (F.IDLEC = L.IDLEC) "
+                    + "INNER JOIN LIBRO O "
+                    + "ON (F.IDLIB = O.IDLIB)"
+                    + "INNER JOIN EDITORIAL E "
+                    + "ON (O.IDEDI = E.IDEDI) "
+                    + "INNER JOIN AUTOR A "
+                    + "ON (O.IDAUT = A.IDAUT) "
+                    + "INNER JOIN PAIS P "
+                    + "ON(A.IDPAIS = P.IDPAIS) "
+                    + "ORDER BY O.TITLIB");
+            
+            while(rs.next()){
+                //get
+                listaprestamo.add(new Prestamo(rs.getInt("IDPRE"), rs.getDate("FECHPRE"), 
+                        new usuarios(rs.getInt("IDLEC"), rs.getString("NOMLEC"), rs.getString("APELEC"), rs.getString("TELLEC"), rs.getString("NOMUSULEC"), rs.getString("PASLEC")),
+                        new Libros(rs.getInt("IDLIB"), rs.getString("TITLIB"), 
+                                new Editorial(rs.getInt("IDEDI"), rs.getString("NOMEDI")),
+                                new Autor(rs.getInt("IDAUT"), rs.getString("NOMAUT"), rs.getString("APEAUT"), 
+                                new Pais(rs.getInt("IDPAIS"), rs.getString("NOMPAIS"))))));
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println("ERROR: "+ ex);
+        }
+        //cell set value factory to tableview
+        
+        clmnLibro.setCellValueFactory(new PropertyValueFactory<Prestamo, Libros>("libro"));
+        clmnfecha.setCellValueFactory(new PropertyValueFactory<Prestamo, Date>("FECHPRE"));
+        clmnlectorlibro.setCellValueFactory(new PropertyValueFactory<Prestamo, usuarios>("Usuario"));
+        
+        tblprestamo.setItems(null);
+        tblprestamo.setItems(listaprestamo);
     }
     
     public void closeWindows(){

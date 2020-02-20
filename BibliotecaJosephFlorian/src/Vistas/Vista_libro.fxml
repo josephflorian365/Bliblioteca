@@ -76,7 +76,7 @@
                         <Image url="@../imagenes/kisspng-vector-graphics-book-computer-icons-encapsulated-p-5bf9f29b799da7.3176548015431072274982.png" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="txtcodigo" layoutX="481.0" layoutY="32.0" prefHeight="25.0" prefWidth="61.0" promptText="ID" />
+                  <TextField fx:id="txtcodigo" disable="true" layoutX="481.0" layoutY="32.0" prefHeight="25.0" prefWidth="61.0" promptText="ID" />
                </children>
             </AnchorPane>
             <Label layoutX="200.0" layoutY="14.0" text="REGISTRAR" textFill="WHITE">
