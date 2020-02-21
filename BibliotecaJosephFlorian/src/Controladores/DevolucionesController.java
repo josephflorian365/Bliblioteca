@@ -13,7 +13,8 @@ import Modelos.usuarios;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
-import java.util.Observable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +27,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -40,18 +42,17 @@ import javafx.stage.Stage;
  * @author Js
  */
 public class DevolucionesController implements Initializable {
+    //PRESTAMO GUIS
     @FXML
-    private Button btnDevolver;
+    private TableView<Prestamo> tblPre;
     @FXML
-    private TableView<devoluciones> tblPre;
+    private TableColumn<Prestamo, Integer> clmnIdPre;
     @FXML
-    private TableColumn<devoluciones, Integer> clmnIdPre;
+    private TableColumn<Prestamo, Date> clmnfechaPre;
     @FXML
-    private TableColumn<devoluciones, Prestamo> clmnfechaPre;
+    private TableColumn<Prestamo, Libros> clmnLibro;
     @FXML
-    private TableColumn<devoluciones, Libros> clmnLibro;
-    @FXML
-    private TableColumn<devoluciones, usuarios> clmnLector;
+    private TableColumn<Prestamo, usuarios> clmnLector;
     @FXML
     private TextField tctLibro;
     @FXML
@@ -60,25 +61,31 @@ public class DevolucionesController implements Initializable {
     private TextField txtfechaPre;
     @FXML
     private DatePicker cmbDev;
-    @FXML
-    private TableView<?> tblDev;
-    @FXML
-    private TableColumn<?,?> clmnIdDev;
-    @FXML
-    private TableColumn<?,?> clmnfechaDev;
-    @FXML
-    private TableColumn<?,? > clmlnLibro;
-    @FXML
-    private TableColumn<?,?> clmlnLec;
     
-    private ObservableList<devoluciones> listadevoluciones;
+    //DEVOLUCIONES GUIS
+    @FXML
+    private Button btnDevolver;
+    @FXML
+    private TableView<devoluciones> tblDev;
+    @FXML
+    private TableColumn<devoluciones,Integer> clmnIdDev;
+    @FXML
+    private TableColumn<devoluciones, String> clmnfechaPrestado;
+    @FXML
+    private TableColumn<devoluciones,Date> clmnfechaDev;
+    @FXML
+    private TableColumn<devoluciones, String> clmnLibroDev;
+    @FXML
+    private TableColumn<devoluciones, String> clmnLecDev;
+    
+    //PRESTAMO
     private ObservableList<Prestamo> listaprestamo;
     private ObservableList<usuarios> listausuarios;
     private ObservableList<Libros> listalibros;
+    
+    //devoluciones
+    private ObservableList<devoluciones> listadevolucion;
 
-    /**
-     * Initializes the controller class.
-     */
     
     private Conexion conexion;
     @Override
@@ -87,37 +94,54 @@ public class DevolucionesController implements Initializable {
         conexion= new Conexion();
         conexion.conDB();
         
-        //inicializamos listas
-        listadevoluciones= FXCollections.observableArrayList();
+        //inicializamos listas PRESTAMO
         listaprestamo= FXCollections.observableArrayList();
         listalibros= FXCollections.observableArrayList();
         listausuarios= FXCollections.observableArrayList();
         
-        //llenar listas
-        devoluciones.llenarInformacion(conexion.conDB(), listadevoluciones);
+        //inicializamos listas devoluciones
+        listadevolucion=FXCollections.observableArrayList();
+        
+        //llenar listas PRESTAMO
         Prestamo.llenarInformacion(conexion.conDB(), listaprestamo);
         usuarios.llenarInformacionUsuarios(conexion.conDB(), listausuarios);
         Libros.llenarInformacionLibros(conexion.conDB(), listalibros);
+        
+        //llenar listas devoluciones
+        devoluciones.llenarInformacion(conexion.conDB(), listadevolucion);
 
         
-        // Enlazar listas con tableview
-        tblPre.setItems(listadevoluciones);
+        // Enlazar listas con tableview PRESTAMO
+        tblPre.setItems(listaprestamo);
         
-        //enlazar columnas con atributos
-        clmnIdPre.setCellValueFactory(new PropertyValueFactory<devoluciones, Integer>("IDDEV"));
-        clmnfechaPre.setCellValueFactory(new PropertyValueFactory<devoluciones, Prestamo>("prestamo"));
-        clmnLibro.setCellValueFactory(new PropertyValueFactory<devoluciones, Libros>("libro"));
-        clmnLector.setCellValueFactory(new PropertyValueFactory<devoluciones, usuarios>("usuario"));
+        // Enlazar listas con tableview devoluciones
+        tblDev.setItems(listadevolucion);
+
+        
+        //enlazar columnas con atributos PRESTAMO
+        clmnIdPre.setCellValueFactory(new PropertyValueFactory<Prestamo, Integer>("IDPRE"));
+        clmnfechaPre.setCellValueFactory(new PropertyValueFactory<Prestamo, Date>("FECHPRE"));
+        clmnLibro.setCellValueFactory(new PropertyValueFactory<Prestamo, Libros>("libro"));
+        clmnLector.setCellValueFactory(new PropertyValueFactory<Prestamo, usuarios>("Usuario"));
+        
+        //enlazar columnas con atributos devoluciones
+        clmnIdDev.setCellValueFactory(new PropertyValueFactory<devoluciones, Integer>("IDDEV"));
+        clmnfechaPrestado.setCellValueFactory(new PropertyValueFactory<devoluciones, String>("fechapre"));
+        clmnfechaDev.setCellValueFactory(new PropertyValueFactory<devoluciones, Date>("FECHDEV"));
+        clmnLibroDev.setCellValueFactory(new PropertyValueFactory<devoluciones, String>("libro"));
+        clmnLecDev.setCellValueFactory(new PropertyValueFactory<devoluciones, String>("usuario"));
+        
+      
         gestionarEventos();
     }    
     public void gestionarEventos(){
         tblPre.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<devoluciones>() {
+                new ChangeListener<Prestamo>() {
                     @Override
-                    public void changed(ObservableValue<? extends devoluciones> arg0,
-                            devoluciones valorAnterior, devoluciones valorSeleccionado){
+                    public void changed(ObservableValue<? extends Prestamo> arg0,
+                            Prestamo valorAnterior, Prestamo valorSeleccionado){
                         if(valorSeleccionado != null){
-                            txtfechaPre.setText(String.valueOf(valorSeleccionado.getPrestamo()));
+                            txtfechaPre.setText(String.valueOf(valorSeleccionado.getFECHPRE()));
                             txtLector.setText(String.valueOf(valorSeleccionado.getUsuario()));
                             tctLibro.setText(String.valueOf(valorSeleccionado.getLibro()));
                         }
@@ -126,6 +150,74 @@ public class DevolucionesController implements Initializable {
         }
         );
     }
+    public void guardarRegistro(){
+        //crear una nueva instancia del tipo devoluciones
+        devoluciones d = new devoluciones(0, 
+                txtfechaPre.getText(), 
+                txtLector.getText(), 
+                tctLibro.getText(), 
+                Date.valueOf(cmbDev.getValue()));
+        //llamar al metodo de la clase devoluciones
+        conexion.conDB();
+        int resultado = d.guardarRegistro(conexion.conDB());
+        
+        if(resultado == 1){
+            listadevolucion.add(d);
+            
+            //JDK 8u40
+            Alert mensaje = new Alert(Alert.AlertType.INFORMATION);
+            mensaje.setTitle("Libro devuelto");
+            mensaje.setContentText("El libro fue entregado exitosamente");
+            mensaje.setHeaderText("Resultado: ");
+            mensaje.show();
+        }
+    }
+    
+    public void eliminarRegistro(){
+        
+        conexion.conDB();
+        int resultado = tblPre.getSelectionModel().getSelectedItem().eliminarRegistro(conexion.conDB());
+        
+        if(resultado == 1){
+            listaprestamo.remove(tblPre.getSelectionModel().getSelectedIndex());
+            
+        }
+    }
+    
+    public void refrescartabla(){
+        try{
+            conexion.conDB();
+            listadevolucion = FXCollections.observableArrayList();
+
+            //execute Query
+            ResultSet rs = conexion.conDB().createStatement().executeQuery("SELECT * FROM DEVOLUCION");
+                  while(rs.next()){
+                      listadevolucion.add(new devoluciones(rs.getInt("IDDEV"), rs.getString("FECHPREDEV"), rs.getString("LECDEV"), rs.getString("LIBDEV"), rs.getDate("FECHDEVDEV")));
+                  }  
+        } catch (SQLException ex) {
+            System.out.println("ERROR: " +ex);
+        }
+        
+        //cell set value factory to tableview
+        
+        clmnIdDev.setCellValueFactory(new PropertyValueFactory<devoluciones, Integer>("IDDEV"));
+        clmnfechaPrestado.setCellValueFactory(new PropertyValueFactory<devoluciones, String>("fechapre"));
+        clmnfechaDev.setCellValueFactory(new PropertyValueFactory<devoluciones, Date>("FECHDEV"));
+        clmnLibroDev.setCellValueFactory(new PropertyValueFactory<devoluciones, String>("libro"));
+        clmnLecDev.setCellValueFactory(new PropertyValueFactory<devoluciones, String>("usuario"));
+        
+        tblDev.setItems(null);
+        tblDev.setItems(listadevolucion);
+        
+    }
+    
+    @FXML
+    public void devolverLibro(){
+        eliminarRegistro();
+        guardarRegistro();
+        refrescartabla();
+    }
+    
     
     public void closeWindows(){
         try{
