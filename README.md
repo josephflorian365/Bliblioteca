@@ -14,3 +14,5 @@
 ![ca82d284-2f42-4320-b763-216b09556640](https://user-images.githubusercontent.com/53907643/74790242-079bcb00-5285-11ea-81a7-12fd996b9670.jpg)
 # Diseño Prestamo
 ![4adad147-d14d-4377-b573-18ad1e8c5e78](https://user-images.githubusercontent.com/53907643/74867152-2b611e80-5322-11ea-9854-3b4153c0993a.jpg)
+# Diseño Devolución
+![691f7b55-ffa4-43dc-b300-907e8a5a9d9c](https://user-images.githubusercontent.com/53907643/75003215-175a1180-5435-11ea-99e1-41bc4a97bfb1.jpg)
