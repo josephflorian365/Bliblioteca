@@ -18,11 +18,17 @@
 ![691f7b55-ffa4-43dc-b300-907e8a5a9d9c](https://user-images.githubusercontent.com/53907643/75003215-175a1180-5435-11ea-99e1-41bc4a97bfb1.jpg)
 # Concluiones
 -En base a todo lo expuesto anteriormente puedo concluir que el sistema de biblioteca permitira tener un control de prestamos y devoluciones de los libros en caso se pierdan o se olviden a quien fue prestado.
+#
 -Los libros pueden ser añadidos o eliminados solo por el administrador.
+#
 -Los prestamos serán hechos por el administrador.
+#
 -Se tiene un control de fechas al momento del préstamo y al momento de la devolución.
 # Recomendaciones
 -Agregar al usuario antes de prestar el libro, ya que no podrá realizar el préstamo correctamente.
+#
 -Al momento de eliminar un préstamo debe de estar seguro totalmente debido a que no existe un backup de la base de datos.
+#
 -Las sanciones serán realizadas por el mismo administrador ya que el software no cuenta con un tiempo de espera poe préstamo para aplicar con la sanción automáticamente.
+#
 -Si desea agregar un nuevo administrador deberá contar con ayuda del developer para añadir o cambiar los administradores del sistema.
