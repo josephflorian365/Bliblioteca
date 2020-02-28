@@ -136,6 +136,7 @@ public class PrestamoController implements Initializable {
     
     @FXML
     public void guardarRegistro(){
+        if(validarEntradadeDatos()){
         //crear una nueva instancia del tipo Prestamo
         Prestamo f = new Prestamo(0,
                                     Date.valueOf(cmbfecha.getValue()),
@@ -156,6 +157,7 @@ public class PrestamoController implements Initializable {
             mensaje.setHeaderText("Resultado: ");
             mensaje.show();
         }
+      }
     }
     
     @FXML
@@ -317,6 +319,30 @@ public class PrestamoController implements Initializable {
         
         tblprestamo.setItems(null);
         tblprestamo.setItems(listaprestamo);
+    }
+    
+    private boolean validarEntradadeDatos(){
+        String errorMessage = "";
+        if(cmblibro.getSelectionModel().getSelectedItem() == null){
+            errorMessage += "Item inválido\n";
+        }
+        if(cmbusuario.getSelectionModel().getSelectedItem() == null){
+            errorMessage += "Item no válido\n";
+        }
+        if(cmbfecha.getValue() ==null){
+            errorMessage += "Fecha no válida\n";
+        }
+        if(errorMessage.length() == 0){
+            return  true;
+        }else{
+            //mostrando el mensaje de error
+            Alert mensaje = new Alert(Alert.AlertType.ERROR);
+            mensaje.setTitle("Registro no válido");
+            mensaje.setHeaderText("Campos invalidos por favor corrija...");
+            mensaje.setContentText(errorMessage);
+            mensaje.show();
+            return false;
+        }
     }
     
     public void closeWindows(){

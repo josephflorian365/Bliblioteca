@@ -76,8 +76,6 @@ public class AutorController implements Initializable {
 
     private Conexion conexion;
 
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // TODO
@@ -109,12 +107,12 @@ public class AutorController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Autor> arg0,
                     Autor valorAnterior, Autor valorSeleccionado) {
-                if(valorSeleccionado != null){
+                if (valorSeleccionado != null) {
                     txtcodigo.setText(String.valueOf(valorSeleccionado.getIDAUT()));
                     txtNomAut.setText(valorSeleccionado.getNOMAUT());
                     txtApeAut.setText(valorSeleccionado.getAPEAUT());
                     cmbPaisAut.setValue(valorSeleccionado.getPais());
-                    
+
                     btnGuardarAut.setDisable(true);
                     btnEliminarAut.setDisable(false);
                     btnactualizaraut.setDisable(false);
@@ -122,41 +120,45 @@ public class AutorController implements Initializable {
             }
         });
     }
+
     @FXML
-    public void guardarRegistro(){
+    public void guardarRegistro() {
+        if(validarEntradadeDatos()){
         //Crear una nueva instancia del tipo Autor
         Autor a = new Autor(0,
-                            txtNomAut.getText(),
-                            txtApeAut.getText(), 
-                            cmbPaisAut.getSelectionModel().getSelectedItem()
+                txtNomAut.getText(),
+                txtApeAut.getText(),
+                cmbPaisAut.getSelectionModel().getSelectedItem()
         );
         conexion.conDB();
         int resultado = a.guardarRegistro(conexion.conDB());
-        
-        if (resultado == 1){
-        listautor.add(a);
-        refrescarData();
-        //JDK 8u40
-        Alert mensaje = new Alert(Alert.AlertType.INFORMATION);
-        mensaje.setTitle("Registro agregado");
-        mensaje.setContentText("El registro ha sido agregado exitosamente");
-        mensaje.setHeaderText("Resultado: ");
-        mensaje.show(); 
+
+        if (resultado == 1) {
+            listautor.add(a);
+            refrescarData();
+            //JDK 8u40
+            Alert mensaje = new Alert(Alert.AlertType.INFORMATION);
+            mensaje.setTitle("Registro agregado");
+            mensaje.setContentText("El registro ha sido agregado exitosamente");
+            mensaje.setHeaderText("Resultado: ");
+            mensaje.show();
+        }
         }
     }
+
     @FXML
-    public void actualizarRegistro(){
+    public void actualizarRegistro() {
         Autor a = new Autor(
-                            Integer.valueOf(txtcodigo.getText()),
-                            txtNomAut.getText(),
-                            txtApeAut.getText(),
-                            cmbPaisAut.getSelectionModel().getSelectedItem()
+                Integer.valueOf(txtcodigo.getText()),
+                txtNomAut.getText(),
+                txtApeAut.getText(),
+                cmbPaisAut.getSelectionModel().getSelectedItem()
         );
         conexion.conDB();
         int resultado = a.actualizarRegistro(conexion.conDB());
-        
-        if(resultado == 1){
-            listautor.set(tblAutor.getSelectionModel().getSelectedIndex(),a);
+
+        if (resultado == 1) {
+            listautor.set(tblAutor.getSelectionModel().getSelectedIndex(), a);
             //JDK 8u40
             Alert mensaje = new Alert(AlertType.INFORMATION);
             mensaje.setTitle("Registro actualizado");
@@ -165,12 +167,13 @@ public class AutorController implements Initializable {
             mensaje.show();
         }
     }
+
     @FXML
-    public void eliminarRegistro(){
+    public void eliminarRegistro() {
         conexion.conDB();
         int resultado = tblAutor.getSelectionModel().getSelectedItem().eliminarRegistro(conexion.conDB());
-        
-        if(resultado == 1){
+
+        if (resultado == 1) {
             listautor.remove(tblAutor.getSelectionModel().getSelectedIndex());
             //JDK 8u>40
             Alert mensaje = new Alert(AlertType.INFORMATION);
@@ -180,14 +183,14 @@ public class AutorController implements Initializable {
             mensaje.show();
         }
     }
-    
+
     @FXML
-    public void limpiarComponentes(){
+    public void limpiarComponentes() {
         txtcodigo.setText(null);
         txtNomAut.setText(null);
         txtApeAut.setText(null);
         cmbPaisAut.setValue(null);
-        
+
         btnGuardarAut.setDisable(false);
         btnEliminarAut.setDisable(true);
         btnactualizaraut.setDisable(true);
@@ -212,76 +215,98 @@ public class AutorController implements Initializable {
             Logger.getLogger(Vista_usuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void refrescarData(){
-        try{
+
+    public void refrescarData() {
+        try {
             conexion.conDB();
             listaPais = FXCollections.observableArrayList();
             listautor = FXCollections.observableArrayList();
 
-
             //Execute query
             ResultSet rs = conexion.conDB().createStatement().executeQuery("SELECT A.IDAUT, "
-                                                    + "A.NOMAUT, "
-                                                    + "A.APEAUT, "
-                                                    + "A.IDPAIS, "
-                                                    + "P.NOMPAIS "
-                                                    + "FROM AUTOR A "
-                                                    + "INNER JOIN PAIS P "
-                                                    + "ON (A.IDPAIS = P.IDPAIS) ");
-            while (rs.next()){
+                    + "A.NOMAUT, "
+                    + "A.APEAUT, "
+                    + "A.IDPAIS, "
+                    + "P.NOMPAIS "
+                    + "FROM AUTOR A "
+                    + "INNER JOIN PAIS P "
+                    + "ON (A.IDPAIS = P.IDPAIS) ");
+            while (rs.next()) {
                 //get
                 listautor.add(new Autor(rs.getInt("IDAUT"), rs.getString("NOMAUT"), rs.getString("APEAUT"),
-                new Pais(rs.getInt("IDPAIS"), rs.getString("NOMPAIS"))));
+                        new Pais(rs.getInt("IDPAIS"), rs.getString("NOMPAIS"))));
             }
         } catch (SQLException ex) {
-            System.out.println("ERROR: "+ ex);
+            System.out.println("ERROR: " + ex);
         }
         //cell set value factory to tableview
 
         clmnnomaut.setCellValueFactory(new PropertyValueFactory<Autor, String>("NOMAUT"));
         clmnapeaut.setCellValueFactory(new PropertyValueFactory<Autor, String>("APEAUT"));
         clmnpaisaut.setCellValueFactory(new PropertyValueFactory<Autor, Pais>("pais"));
-        
+
         tblAutor.setItems(null);
         tblAutor.setItems(listautor);
-        
+
     }
     
+    private boolean validarEntradadeDatos(){
+        String errorMessage = "";
+        if(txtNomAut.getText() == null || txtNomAut.getText().length() == 0){
+            errorMessage += "Nombre inválido\n";
+        }
+        if(txtApeAut.getText() == null || txtApeAut.getText().length() == 0){
+            errorMessage += "Apellido inválido\n";
+        }
+        if(cmbPaisAut.getSelectionModel().getSelectedItem()== null){
+            errorMessage += "Item inválido\n"; 
+        } 
+        if(errorMessage.length()==0){
+            return true;
+        }else{
+             //mostrando el mensaje de error
+            Alert mensaje = new Alert(Alert.AlertType.ERROR);
+            mensaje.setTitle("Registro no válido");
+            mensaje.setHeaderText("Campos invalidos por favor corrija...");
+            mensaje.setContentText(errorMessage);
+            mensaje.show();
+            return false;
+        }
+    }
+
     @FXML
-    public void orderBy(){
-        try{
+    public void orderBy() {
+        try {
             conexion.conDB();
             listaPais = FXCollections.observableArrayList();
             listautor = FXCollections.observableArrayList();
 
-
             //Execute query
             ResultSet rs = conexion.conDB().createStatement().executeQuery("SELECT A.IDAUT, "
-                                                    + "A.NOMAUT, "
-                                                    + "A.APEAUT, "
-                                                    + "A.IDPAIS, "
-                                                    + "P.NOMPAIS "
-                                                    + "FROM AUTOR A "
-                                                    + "INNER JOIN PAIS P "
-                                                    + "ON (A.IDPAIS = P.IDPAIS)"
-                                                    + " ORDER BY A.NOMAUT ");
-            while (rs.next()){
+                    + "A.NOMAUT, "
+                    + "A.APEAUT, "
+                    + "A.IDPAIS, "
+                    + "P.NOMPAIS "
+                    + "FROM AUTOR A "
+                    + "INNER JOIN PAIS P "
+                    + "ON (A.IDPAIS = P.IDPAIS)"
+                    + " ORDER BY A.NOMAUT ");
+            while (rs.next()) {
                 //get
                 listautor.add(new Autor(rs.getInt("IDAUT"), rs.getString("NOMAUT"), rs.getString("APEAUT"),
-                new Pais(rs.getInt("IDPAIS"), rs.getString("NOMPAIS"))));
+                        new Pais(rs.getInt("IDPAIS"), rs.getString("NOMPAIS"))));
             }
         } catch (SQLException ex) {
-            System.out.println("ERROR: "+ ex);
+            System.out.println("ERROR: " + ex);
         }
         //cell set value factory to tableview
 
         clmnnomaut.setCellValueFactory(new PropertyValueFactory<Autor, String>("NOMAUT"));
         clmnapeaut.setCellValueFactory(new PropertyValueFactory<Autor, String>("APEAUT"));
         clmnpaisaut.setCellValueFactory(new PropertyValueFactory<Autor, Pais>("pais"));
-        
+
         tblAutor.setItems(null);
         tblAutor.setItems(listautor);
-        
+
     }
 }

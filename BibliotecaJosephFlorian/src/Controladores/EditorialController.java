@@ -109,6 +109,7 @@ public class EditorialController implements Initializable {
     
     @FXML
     public void guardarRegistro(){
+        if(validarEntradadeDatos()){
         //Crear una nueva instancia del tipo Editorial
         Editorial e = new Editorial(0, txttituloedi.getText());
         conexion.conDB();
@@ -123,7 +124,7 @@ public class EditorialController implements Initializable {
             mensaje.setContentText("El registro ha sido agregado exitosamente");
             mensaje.setHeaderText("Resultado: ");
             mensaje.show();
-            
+        }
         }
     }
     
@@ -212,6 +213,24 @@ public class EditorialController implements Initializable {
         
         tbledi.setItems(null);
         tbledi.setItems(listaeditorial);
+    }
+    
+    private boolean validarEntradadeDatos(){
+        String errorMessage = "";
+        if(txttituloedi.getText() == null || txttituloedi.getText().length() == 0){
+            errorMessage += "Titutlo inválido";
+        }
+        if(errorMessage.length() == 0){
+            return true;
+        }else{
+            //mostrando el mensaje de error
+            Alert mensaje = new Alert(Alert.AlertType.ERROR);
+            mensaje.setTitle("Registro no válido");
+            mensaje.setHeaderText("Campos invalidos por favor corrija...");
+            mensaje.setContentText(errorMessage);
+            mensaje.show();
+            return false;
+        }
     }
     
     

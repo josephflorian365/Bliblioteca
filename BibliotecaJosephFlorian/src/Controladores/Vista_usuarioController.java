@@ -83,7 +83,7 @@ public class Vista_usuarioController implements Initializable {
 
     //Colecciones
     private ObservableList<usuarios> listausuarios;
-    
+
     private Conexion conexion;
 
     @Override
@@ -107,25 +107,25 @@ public class Vista_usuarioController implements Initializable {
         clmnTelefono.setCellValueFactory(new PropertyValueFactory<usuarios, String>("TELUSU"));
         clmnNombreUsuario.setCellValueFactory(new PropertyValueFactory<usuarios, String>("NOMUSUSU"));
         clmnPassword.setCellValueFactory(new PropertyValueFactory<usuarios, String>("PASUSU"));
-        
+
         gestionarEventos();
-        
+
     }
-    
+
     public void gestionarEventos() {
         tblUs.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<usuarios>() {
-          @Override
+            @Override
             public void changed(ObservableValue<? extends usuarios> arg0,
                     usuarios valorAnterior, usuarios valorSeleccionado) {
-                if (valorSeleccionado != null) {                    
+                if (valorSeleccionado != null) {
                     txtCodigo.setText(String.valueOf(valorSeleccionado.getIDUSU()));
                     txtNombresUsu.setText(valorSeleccionado.getNOMUSU());
                     txtApeUsu.setText(valorSeleccionado.getAPEUSU());
                     txtTelUsu.setText(valorSeleccionado.getTELUSU());
                     txtuserUsu.setText(valorSeleccionado.getNOMUSUSU());
                     txtcontraUsu.setText(valorSeleccionado.getPASUSU());
-                    
+
                     btnGuUsu.setDisable(true);
                     btnElUsu.setDisable(false);
                     btnActUsu.setDisable(false);
@@ -137,18 +137,20 @@ public class Vista_usuarioController implements Initializable {
 
     @FXML
     public void guardarRegistro() {
-        //Crear una nueva instancia del usuario
-        usuarios u = new usuarios(0,
+        if(validarEntradadeDatos()){
+             //Crear una nueva instancia del usuario
+           usuarios u = new usuarios(0,
                 txtNombresUsu.getText(),
                 txtApeUsu.getText(),
                 txtTelUsu.getText(),
                 txtuserUsu.getText(),
                 txtcontraUsu.getText());
-        //Llamar el metodo guardarRegistro de la clase Alumno
-        conexion.conDB();
+        
+      
+       //Llamar el metodo guardarRegistro de la clase usuarios
         int resultado = u.guardarRegistro(conexion.conDB());
         
-        if (resultado == 1) {
+            if(resultado == 1) {
             listausuarios.add(u);
             idmostrar();
             //JDK 8u40
@@ -157,10 +159,12 @@ public class Vista_usuarioController implements Initializable {
             mensaje.setContentText("El registro se ha egregado correctamente");
             mensaje.setHeaderText("Resultado:");
             mensaje.show();
+        
+        } 
         }
         
     }
-    
+
     @FXML
     public void actualizarRegistro() {
         usuarios u = new usuarios(
@@ -173,24 +177,24 @@ public class Vista_usuarioController implements Initializable {
         );
         conexion.conDB();
         int resultado = u.actualizarRegistro(conexion.conDB());
-        
+
         if (resultado == 1) {
             listausuarios.set(tblUs.getSelectionModel().getSelectedIndex(), u);
-            
+
             Alert mensaje = new Alert(AlertType.INFORMATION);
             mensaje.setTitle("Registro actualizado");
             mensaje.setContentText("El registro ha sido actualizado exitosamente");
             mensaje.setHeaderText("Resultado:");
             mensaje.show();
         }
-        
+
     }
-    
+
     @FXML
     public void eliminarRegistro() {
         conexion.conDB();
         int resultado = tblUs.getSelectionModel().getSelectedItem().eliminarRegistro(conexion.conDB());
-        
+
         if (resultado == 1) {
             listausuarios.remove(tblUs.getSelectionModel().getSelectedIndex());
             Alert mensaje = new Alert(AlertType.INFORMATION);
@@ -200,41 +204,41 @@ public class Vista_usuarioController implements Initializable {
             mensaje.show();
         }
     }
-    
+
     @FXML
     public void limpiarComponentes() {
-        txtCodigo.setText(null);
-        txtNombresUsu.setText(null);
-        txtApeUsu.setText(null);
-        txtTelUsu.setText(null);
-        txtuserUsu.setText(null);
-        txtcontraUsu.setText(null);
-        
+        txtCodigo.setText("");
+        txtNombresUsu.setText("");
+        txtApeUsu.setText("");
+        txtTelUsu.setText("");
+        txtuserUsu.setText("");
+        txtcontraUsu.setText("");
+
         btnGuUsu.setDisable(false);
         btnElUsu.setDisable(true);
         btnActUsu.setDisable(true);
     }
-    
+
     public void closeWindows() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/Principal.fxml"));
-            
+
             Parent root = loader.load();
-            
+
             PrincipalController controlador = loader.getController();
-            
+
             Scene scene = new Scene(root);
             Stage stage = new Stage();
-            
+
             stage.setScene(scene);
             new animatefx.animation.ZoomIn(root).play();
             stage.show();
-            
+
         } catch (IOException ex) {
             Logger.getLogger(Vista_usuarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @FXML
     private void orderby(ActionEvent event) {
         try {
@@ -250,19 +254,18 @@ public class Vista_usuarioController implements Initializable {
             System.out.println("ERROR: " + ex);
         }
         //cell set value factory to tableview
-        
-        
+
         clmnNombre.setCellValueFactory(new PropertyValueFactory<>("NOMUSU"));
         clmnApellido.setCellValueFactory(new PropertyValueFactory<>("APEUSU"));
         clmnTelefono.setCellValueFactory(new PropertyValueFactory<>("TELUSU"));
         clmnNombreUsuario.setCellValueFactory(new PropertyValueFactory<>("NOMUSUSU"));
         clmnPassword.setCellValueFactory(new PropertyValueFactory<>("PASUSU"));
-        
+
         tblUs.setItems(null);
         tblUs.setItems(listausuarios);
     }
-    
-    private void idmostrar(){
+
+    private void idmostrar() {
         try {
             conexion.conDB();
             listausuarios = FXCollections.observableArrayList();
@@ -276,16 +279,46 @@ public class Vista_usuarioController implements Initializable {
             System.out.println("ERROR: " + ex);
         }
         //cell set value factory to tableview
-        
-        
+
         clmnNombre.setCellValueFactory(new PropertyValueFactory<>("NOMUSU"));
         clmnApellido.setCellValueFactory(new PropertyValueFactory<>("APEUSU"));
         clmnTelefono.setCellValueFactory(new PropertyValueFactory<>("TELUSU"));
         clmnNombreUsuario.setCellValueFactory(new PropertyValueFactory<>("NOMUSUSU"));
         clmnPassword.setCellValueFactory(new PropertyValueFactory<>("PASUSU"));
-        
+
         tblUs.setItems(null);
         tblUs.setItems(listausuarios);
     }
     
+    private boolean validarEntradadeDatos(){
+        String errorMessage = "";
+        if(txtNombresUsu.getText() == null || txtNombresUsu.getText().length() == 0){
+            errorMessage += "Nombre invalido\n";
+        }
+        if(txtApeUsu.getText() == null || txtApeUsu.getText().length() == 0 ){
+            errorMessage += "Apellido inavlido\n";
+        }
+        if(txtTelUsu.getText() == null || txtTelUsu.getText().length() == 0 ){
+            errorMessage += "Teléfono invalido\n";
+        }
+        if(txtuserUsu.getText() == null || txtuserUsu.getText().length() == 0 ){
+            errorMessage += "Nombre de usuario inválido\n";
+        }
+        if(txtcontraUsu.getText() == null || txtcontraUsu.getText().length() == 0 ){
+            errorMessage += "Contraseña inválida\n";
+        }
+        if(errorMessage.length() == 0){
+            return true;
+        }else{
+            //mostrando el mensaje de error
+            Alert mensaje = new Alert(Alert.AlertType.ERROR);
+            mensaje.setTitle("Registro no válido");
+            mensaje.setHeaderText("Campos invalidos por favor corrija...");
+            mensaje.setContentText(errorMessage);
+            mensaje.show();
+            return false;
+        }
+        }
+    
+
 }

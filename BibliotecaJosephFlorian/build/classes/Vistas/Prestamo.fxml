@@ -40,7 +40,7 @@
                   <Image url="@../imagenes/83194926-smiling-male-shopper-using-credit-card-machine-at-checkout-counter-in-shop.jpg" />
                </image>
             </ImageView>
-            <DatePicker fx:id="cmbfecha" layoutX="17.0" layoutY="241.0" prefHeight="25.0" prefWidth="245.0" promptText="Fecha" styleClass="buttondevolucion" stylesheets="@../Styling/fullpackstyling.css" />
+            <DatePicker fx:id="cmbfecha" layoutX="17.0" layoutY="241.0" prefHeight="25.0" prefWidth="245.0" promptText="Fecha" styleClass="jfx-date-picker" stylesheets="@../Styling/fullpackstyling.css" />
             <ComboBox fx:id="cmblibro" layoutX="18.0" layoutY="77.0" prefHeight="25.0" prefWidth="245.0" promptText="Libros" styleClass="buttondevolucion" stylesheets="@../Styling/fullpackstyling.css" />
             <ComboBox fx:id="cmbusuario" layoutX="17.0" layoutY="162.0" prefHeight="25.0" prefWidth="245.0" promptText="Usuarios" styleClass="buttondevolucion" stylesheets="@../Styling/fullpackstyling.css" />
             <Button fx:id="btnguardar" disable="true" layoutX="33.0" layoutY="369.0" mnemonicParsing="false" onAction="#guardarRegistro" prefHeight="27.0" prefWidth="224.0" styleClass="buttonguardar" stylesheets="@../Styling/fullpackstyling.css" text="GUARDAR" />
